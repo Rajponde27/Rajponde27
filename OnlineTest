@@ -1,0 +1,99 @@
+package onlinetest;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import junit.framework.Assert;
+
+public class MoveBeyondSimpleCompliance {
+
+	public static void main(String[] args) {
+		
+		@BeforeMethod
+		Public void start() 
+		{
+		System.setProperty("webdriver.chrome.driver", "D:\\Software\\chromedriver.exe");
+
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		
+		driver.manage().timeouts().implicitlywait(30,TimeUnit.SECONDS);
+		}
+		
+		Thread.sleep(2000);
+		
+		@Test(Priority=1)
+		Public void MoveBeyondSimpleCompliance()
+		{
+		driver.get("https://www.tendable.com/");
+		
+		driver.findelement(By.xpath("//a[@class='body-button bg-aqua-600']")).click();
+		
+		driver.findelement(By.xpath("//button[@data-target='.toggle-163701']")).click();
+		
+		driver.close();
+		}
+		
+		@Test(Priority=2)
+		Public void verifytitle() 
+		{
+
+		driver.get("https://www.tendable.com/");
+		
+		String actualTitle=driver.getTitle();
+		
+		String expectedTitle="What is Tendable";
+		
+		Assert.assertEquals(actualTitle, expectedTitle);
+		
+		driver.close();
+		}
+		
+		@Test(Priority=3)
+		Public void verifyimage() 
+		{
+
+		driver.get("https://www.tendable.com/");
+		
+		boolean img=driver.findelement(By.xpath("//img[@alt='Mobile app-Tendable']")).isDisplayed();
+		
+		Assert.assertTrue(img);
+		driver.close();
+		}
+		
+		@Test(Priority=4)
+		Public void Getmoredoneinlesstime() 
+		{
+
+		driver.get("https://www.tendable.com/");
+		
+		driver.findelement(By.xpath("//h2[normalize-space()='Get more done in less time']"));
+		
+		
+		driver.close();
+		}
+		
+		@Test(Priority=5)
+		Public void locations() {
+			
+		driver.get("https://www.tendable.com/");
+		
+		driver.findelement(By.xpath("//h2[normalize-space()='Where are we based?']"));
+		
+		driver.close()
+		}
+		
+		@AfterMethod()
+		{
+		driver.quit();
+		}
+		
+		
+		
+		
+
+	}
+
+}
